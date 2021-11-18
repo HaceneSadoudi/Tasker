@@ -61,3 +61,49 @@ clear_all.addEventListener('click', function() {
     updateLocalStorage('store');
     updateLeftItems();
 });
+
+function createNewTask(text, nbr, status) {
+    let li = document.createElement('li');
+    li.setAttribute('class', 'todo-list-task '+ status);
+
+    let input = document.createElement('input');
+    input.setAttribute('type', 'checkbox');
+    input.setAttribute('id', 'todo-list-checkbox'+nbr);
+    input.setAttribute('class', 'todo-list-checkbox');
+    if(status == 'active') {console.log('active');
+        input.setAttribute('checkbox', 'checkbox');
+                            input.checked = false;
+    }else if (status == 'completed') {
+        input.checked = true;
+        input.removeAttribute('checkbox');console.log('completed');
+    }
+    let label = document.createElement('label');
+    label.setAttribute('for', 'todo-list-checkbox'+nbr);
+    let p = document.createElement('p');
+    p.setAttribute('class', 'todo-list-title');
+    p.innerHTML = text;
+    let a = document.createElement('a');
+    a.setAttribute('href', 'javascript:void(0)');
+    a.setAttribute('class', 'todo-list-remove');
+    let i_remove = document.createElement('i');
+    i_remove.setAttribute('class', 'fa fa-trash');
+    a.appendChild(i_remove);
+    let a_1 = document.createElement('a');
+    a_1.setAttribute('href' , 'javascript:void(0)');
+    a_1.setAttribute('class', 'todo-list-edit');
+    let i_edit
+
+    li.appendChild(input);
+    li.appendChild(label);
+    li.appendChild(p);
+    li.appendChild(a);
+
+    todo_list.appendChild(li);
+    new_task_input.value = '';
+    // Update filter after adding new task
+    updateFilter();
+}
+
+function updateFilter() {
+    document.querySelector('.controls-list li.active a').click();
+}
