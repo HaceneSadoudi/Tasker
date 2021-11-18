@@ -52,3 +52,12 @@ function updateLeftItems() {
     let activeTasks = getTotalTasks() - getCompletedTasks();
     left_items_element.innerHTML = activeTasks == 1 ? `${activeTasks} item left`: `${activeTasks} items left`; 
 }
+
+clear_all.addEventListener('click', function() {
+    while(todo_list.firstChild) {
+    todo_list.removeChild(todo_list.firstChild);
+    }
+    store = [];
+    updateLocalStorage('store');
+    updateLeftItems();
+});
