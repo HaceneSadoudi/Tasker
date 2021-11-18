@@ -117,3 +117,26 @@ function hightLightActiveBtn(name) {
     document.querySelector('.controls-list .' + name + '-btn').parentNode.classList.add('active');
 }
 
+function filterTasks(filter) {
+    console.log(this);
+    let tasks = todo_list.children;
+    console.log(tasks);
+    for(let i=tasks.length - 1;i>=0;i--) {
+        
+        if(filter == 'completed') { 
+            tasks[i].style.display = "block";
+            console.log(tasks[i].classList);
+            if(!tasks[i].classList.contains('completed')) {
+                tasks[i].style.display = "none";
+            }  
+        }else if(filter == 'active') {
+            tasks[i].style.display = "block";
+            if(tasks[i].classList.contains('completed')) {
+                tasks[i].style.display = "none";
+            }
+        }else {
+            tasks[i].style.display = "block";
+        }
+    
+}
+}
