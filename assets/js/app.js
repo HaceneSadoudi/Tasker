@@ -107,3 +107,13 @@ function createNewTask(text, nbr, status) {
 function updateFilter() {
     document.querySelector('.controls-list li.active a').click();
 }
+
+function hightLightActiveBtn(name) {
+    let controls_buttons = document.querySelector('ul.controls-list').children;
+    for(let i=0;i<controls_buttons.length;i++) {
+        controls_buttons[i].classList.remove('active');
+    }
+    console.log('.controls-list ' + name + '-btn');
+    document.querySelector('.controls-list .' + name + '-btn').parentNode.classList.add('active');
+}
+
