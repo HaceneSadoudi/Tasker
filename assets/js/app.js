@@ -146,3 +146,89 @@ function updateLocalStorage(varName) {
     console.log(v);
     localStorage.setItem(varName, JSON.stringify(v));
 }
+
+switch_mode.addEventListener('click', function() {
+    if(document.body.classList.contains('light')) {
+        document.body.classList.remove('light');
+        document.body.classList.add('dark');
+        theme = 'dark';
+    }else {
+        document.body.classList.remove('dark');
+        document.body.classList.add('light');
+        theme = 'light';
+    }
+    updateLocalStorage('theme');
+});
+
+todo_list.addEventListener('click', function(e) {
+    // Remove task event
+    if(e.target && e.target.classList.contains('todo-list-remove')) {
+        let li = e.target.parentNode;
+        let indexOfTask = store.findIndex(x => x.id == li.firstElementChild.id.slice(-1));
+        
+        store.splice(indexOfTask, 1); 
+        updateLocalStorage('store');
+        li.remove();
+        updateLeftItems();
+        updateFilter();
+    }
+    // Check task event
+    if(e.target && e.target.classList.contains('todo-list-checkbox')) {
+        let checkbox = e.target;
+        let li = e.target.parentNode;
+        let indexOfTask = store.findIndex(x => x.id == checkbox.id.slice(-1));
+        
+        this.insertBefore(li, this.lastElementChild.nextSibling);
+        if(li.classList.contains('completed')) {
+            li.classList.remove('completed');
+            li.classList.add('active')
+            store[indexOfTask].status = 'active';      
+        }else {
+            li.classList.remove('active');
+            li.classList.add('completed');
+            store[indexOfTask].status = 'completed';
+        }
+        updateLocalStorage('store');
+        updateLeftItems();
+        updateFilter();
+    }
+});
+
+
+new_task_input.addEventListener('keyup', function(e) {
+    let obj = {};
+    if(e.keyCode === 13) {
+        obj.id = getTotalTasks();
+        obj.title = this.value;
+        obj.status = 'active';
+        store.push(obj);
+        updateLocalStorage('store');
+        createNewTask(this.value, getTotalTasks(), 'active');
+        updateLeftItems();
+    }
+
+});
+
+clear_all.addEventListener('click', function() {
+    while(todo_list.firstChild) {
+        todo_list.removeChild(todo_list.firstChild);
+    }
+    store = [];
+    updateLocalStorage('store');
+    updateLeftItems();
+});
+
+//Controls Buttons
+all_btn.addEventListener('click', function() {
+    hightLightActiveBtn('all');
+    filterTasks('all');
+});
+active_btn.addEventListener('click', function() {
+    hightLightActiveBtn('active');
+    filterTasks('active');
+});
+completed_btn.addEventListener('click', function() {
+    hightLightActiveBtn('completed');
+    filterTasks('completed');
+});
+  
