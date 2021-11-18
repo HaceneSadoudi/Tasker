@@ -30,4 +30,25 @@ function init() {
     document.body.classList.add(theme);
 
 }
-  
+
+function getTotalTasks() {
+    return todo_list.childElementCount;
+    // --OR--
+    /*let lis = document.querySelectorAll('.todo-list-task');
+    return lis.length;*/
+}
+function getCompletedTasks() {
+    let completedTasks = 0;
+    let tasks = todo_list.children;
+    for(const task of tasks) {
+        if(task.classList.contains('completed')) {
+        completedTasks++; 
+        }
+    }
+    return completedTasks;
+}
+
+function updateLeftItems() {
+    let activeTasks = getTotalTasks() - getCompletedTasks();
+    left_items_element.innerHTML = activeTasks == 1 ? `${activeTasks} item left`: `${activeTasks} items left`; 
+}
