@@ -1,0 +1,253 @@
+  @font-face {
+    font-family: 'Josefin Sans';
+    font-style: italic;
+    font-weight: 300;
+    font-display: swap;
+    src: url(https://fonts.gstatic.com/s/josefinsans/v20/Qw3JZQNVED7rKGKxtqIqX5EUCGZ2dIn0FyA96fCT6oJhKg.ttf) format('truetype');
+  }
+  @font-face {
+    font-family: 'Josefin Sans';
+    font-style: normal;
+    font-weight: 300;
+    font-display: swap;
+    src: url(https://fonts.gstatic.com/s/josefinsans/v20/Qw3PZQNVED7rKGKxtqIqX5E-AVSJrOCfjY46_GbQXME.ttf) format('truetype');
+  }
+  @font-face {
+    font-family: 'Josefin Sans';
+    font-style: normal;
+    font-weight: 400;
+    font-display: swap;
+    src: url(https://fonts.gstatic.com/s/josefinsans/v20/Qw3PZQNVED7rKGKxtqIqX5E-AVSJrOCfjY46_DjQXME.ttf) format('truetype');
+  }
+  :root {
+    --Dark-Grayish-Blue: #777a92;
+    --Very-Dark-Grayish-Blue: #393a4c;
+    --heading: #ffffff;
+    --header-img: url("https://q4-consulting.com/wp-content/uploads/2018/11/mountain-bg.jpg");
+  }
+  :root .light {
+    --text: var(--Very-Dark-Grayish-Blue);
+    --text-completed: var(--Dark-Grayish-Blue);
+    --check-gradieant: linear-gradient(#57ddff, #c058f3);
+    --background: #fff;
+    --header-bg: var(--header-img);
+    --header-bg-overlay: var(--check-gradieant);
+    --input-bg: #fff;
+  }
+  :root .dark {
+    --text: var(--Dark-Grayish-Blue);
+    --text-completed: var(--Very-Dark-Grayish-Blue);
+    --check-gradieant: linear-gradient(#57ddff, #c058f3);
+    --background: #181824;
+    --header-bg: #181824;
+    --header-bg-overlay: #181824;
+    --input-bg: #24273c;
+  }
+  * {
+    box-sizing: border-box;
+  }
+  body {
+    margin: 0;
+    position: relative;
+    transition: all 0.8s ease-in;
+    width: 100%;
+    height: 100vh;
+    font-family: "Josefin Sans", sans-serif;
+    color: var(--text);
+    background: var(--background);
+  }
+  .header {
+    background: var(--header-bg);
+    background-position: center center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    transition: all 0.8s ease-in;
+    transition-delay: 0.5s;
+    width: 100%;
+    height: 35%;
+    position: relative;
+  }
+  .header:after {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: var(--header-bg-overlay);
+    transition: all 0.8s ease-in;
+    opacity: 0.85;
+  }
+  .container {
+    margin: auto;
+    position: relative;
+    top: -200px;
+    width: 500px;
+  }
+  input[type="checkbox"] {
+    visibility: hidden;
+  }
+  .row {
+    display: flex;
+  }
+  .close {
+    position: relative;
+  }
+  .close:after,
+  .close:before {
+    content: "";
+    position: absolute;
+    width: 25px;
+    height: 1px;
+    background: var(--text);
+    right: -2px;
+    top: 50%;
+    transform: rotate(-45deg);
+  }
+  .close:after {
+    transform: rotate(45deg);
+  }
+  .title-theme {
+    justify-content: space-between;
+    position: relative;
+    color: var(--heading);
+  }
+  .title-theme .title {
+    text-transform: uppercase;
+    letter-spacing: 7px;
+    font-weight: bolder;
+  }
+  .title-theme label[for="switch-l"] {
+    position: absolute;
+    right: 0;
+    top: 50%;
+    transform: translateY(-50%);
+    cursor: pointer;
+  }
+  .title-theme label[for="switch-l"] .fa {
+    font-size: 2em;
+  }
+  .todo-input form {
+    width: 100%;
+  }
+  .todo-input form input {
+    width: inherit;
+    font-family: inherit;
+    border-radius: 3px;
+    line-height: 3em;
+    border: none;
+    padding: 0 5px 0 50px;
+    font-size: 1.2rem;
+    background: var(--input-bg);
+    color: var(--text);
+  }
+  .todo-input form input:focus {
+    outline: none;
+  }
+  .todos {
+    margin-top: 20px;
+    background: var(--input-bg);
+    box-shadow: 0px 0px 30px 1px rgba(0, 0, 0, 0.2);
+    border-radius: 3px;
+  }
+  .todos ul#todo-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+  .todos ul#todo-list li.todo-list-task {
+    border-bottom: 1px solid #eee;
+    position: relative;
+    line-height: 2rem;
+  }
+  .todos ul#todo-list li.todo-list-task:hover .todo-list-remove {
+    opacity: 1;
+    visibility: visible;
+  }
+  .todos ul#todo-list li.todo-list-task input[type="checkbox"]:checked + label {
+    background: var(--check-gradieant);
+    border: none;
+  }
+  .todos ul#todo-list li.todo-list-task input[type="checkbox"]:checked + label:after {
+    visibility: visible;
+  }
+  .todos ul#todo-list li.todo-list-task input[type="checkbox"]:checked ~ p {
+    text-decoration: line-through;
+    color: var(--text-completed);
+  }
+  .todos ul#todo-list li.todo-list-task label {
+    border: 1px solid #ccc;
+    position: absolute;
+    left: 10px;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 25px;
+    height: 25px;
+    border-radius: 50%;
+    cursor: pointer;
+  }
+  .todos ul#todo-list li.todo-list-task label:after {
+    content: "";
+    position: absolute;
+    width: 11px;
+    height: 6px;
+    border: 2px solid #fff;
+    border-top: none;
+    border-right: none;
+    top: 6px;
+    left: 6px;
+    transform: rotate(-45deg);
+    visibility: hidden;
+  }
+  .todos ul#todo-list li.todo-list-task p.todo-list-title {
+    display: inline-block;
+    white-space: pre-wrap;
+    overflow: hidden;
+    margin: 0;
+    margin-left: 28px;
+    font-size: 1.2em;
+    width: 80%;
+    margin-top: 13px;
+  }
+  .todos ul#todo-list li.todo-list-task a.todo-list-remove {
+    text-decoration: none;
+    position: absolute;
+    right: 10px;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 23px;
+    height: 23px;
+    opacity: 0;
+    transition: opacity 0.2s ease-in;
+    visibility: none;
+  }
+  .todos ul#todo-list li.todo-list-task a.todo-list-remove i {
+    color: var(--text);
+  }
+  .todos #controls {
+    display: flex;
+    justify-content: space-between;
+    padding: 19px 10px;
+    color: var(--text-completed);
+  }
+  .todos #controls ul.controls-list {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+  .todos #controls ul.controls-list li {
+    display: inline-block;
+    margin: 0 5px;
+  }
+  .todos #controls ul.controls-list li.active a {
+    color: var(--text);
+  }
+  .todos #controls ul.controls-list li a {
+    text-decoration: none;
+    color: inherit;
+  }
+  .todos #controls a#clear-all {
+    text-decoration: none;
+    color: inherit;
+  }
+  
