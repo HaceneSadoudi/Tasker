@@ -138,5 +138,11 @@ function filterTasks(filter) {
             tasks[i].style.display = "block";
         }
     
+    }
 }
+
+function updateLocalStorage(varName) {
+    let v = varName == 'store' ? store : theme;
+    console.log(v);
+    localStorage.setItem(varName, JSON.stringify(v));
 }
