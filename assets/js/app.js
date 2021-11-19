@@ -53,6 +53,10 @@ function updateLeftItems() {
     left_items_element.innerHTML = activeTasks == 1 ? `${activeTasks} item left`: `${activeTasks} items left`; 
 }
 
+init();
+updateLeftItems();
+
+
 clear_all.addEventListener('click', function() {
     while(todo_list.firstChild) {
     todo_list.removeChild(todo_list.firstChild);
@@ -162,8 +166,8 @@ switch_mode.addEventListener('click', function() {
 
 todo_list.addEventListener('click', function(e) {
     // Remove task event
-    if(e.target && e.target.classList.contains('todo-list-remove')) {
-        let li = e.target.parentNode;
+    if(e.target && e.target.classList.contains('fa-trash')) {console.log('hhh")');
+        let li = e.target.parentNode.parentNode;
         let indexOfTask = store.findIndex(x => x.id == li.firstElementChild.id.slice(-1));
         
         store.splice(indexOfTask, 1); 
@@ -205,6 +209,7 @@ new_task_input.addEventListener('keyup', function(e) {
         updateLocalStorage('store');
         createNewTask(this.value, getTotalTasks(), 'active');
         updateLeftItems();
+        console.log("clicked");
     }
 
 });
